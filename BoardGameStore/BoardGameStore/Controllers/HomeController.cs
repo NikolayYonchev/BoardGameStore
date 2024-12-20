@@ -15,6 +15,7 @@ namespace BoardGameStore.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
 

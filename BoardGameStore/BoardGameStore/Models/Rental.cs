@@ -11,9 +11,11 @@ namespace BoardGameStore.Models
         public int RentalId { get; set; }
 
         [Required]
-        public int GameId { get; set; }
+        [ForeignKey("BoardGame")]
+        public int BoardGameId { get; set; }
 
         [Required]
+        [ForeignKey("User")]
         public int UserId { get; set; }
 
         [Required]
@@ -39,10 +41,8 @@ namespace BoardGameStore.Models
         [Required]
         public Status Status { get; set; }
 
-        [ForeignKey("GameId")]
-        public Game Game { get; set; }
+        public BoardGame BoardGame { get; set; }
 
-        [ForeignKey("UserId")]
         public User User { get; set; }
     }
 }

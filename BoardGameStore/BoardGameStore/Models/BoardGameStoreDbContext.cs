@@ -14,7 +14,7 @@ namespace BoardGameStore.Models
             
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
-        public virtual DbSet<Game> Games { get; set; }
+        public virtual DbSet<BoardGame> Games { get; set; }
         public virtual DbSet<Purchase> Purchases { get; set; }
         public virtual DbSet<Rental> Rentals { get; set; }
         public virtual DbSet<User> Users { get; set; }
