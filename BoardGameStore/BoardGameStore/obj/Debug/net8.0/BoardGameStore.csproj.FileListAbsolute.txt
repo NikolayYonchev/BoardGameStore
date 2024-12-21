@@ -270,3 +270,4 @@ D:\Visual Studio Projects\BoardGameStore\BoardGameStore\BoardGameStore\bin\Debug
 D:\Visual Studio Projects\BoardGameStore\BoardGameStore\BoardGameStore\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 D:\Visual Studio Projects\BoardGameStore\BoardGameStore\BoardGameStore\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 D:\Visual Studio Projects\BoardGameStore\BoardGameStore\BoardGameStore\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+D:\Visual Studio Projects\BoardGameStore\BoardGameStore\BoardGameStore\obj\Debug\net8.0\BoardGameStore.sourcelink.json
