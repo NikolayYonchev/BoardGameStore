@@ -1,6 +1,8 @@
 using BoardGameStore.Data;
+using BoardGameStore.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,23 +10,21 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddTransient<SignInManager<User>>();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
+using var serviceScope = app.Services.CreateScope();
+var serviceProvider = serviceScope.ServiceProvider;
+var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
+//dbContext.Database.Migrate();
 
-//using (var scope = app.Services.CreateScope())
-//{
-//    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-//    if (app.Environment.IsDevelopment())  
-//    {
-//        context.Database.EnsureDeleted(); 
-//        context.Database.EnsureCreated(); 
-//    }
-//}
+dbContext.Database.EnsureDeleted();
+dbContext.Database.EnsureCreated();
 
 if (app.Environment.IsDevelopment())
 {

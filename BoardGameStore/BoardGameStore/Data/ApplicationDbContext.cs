@@ -12,7 +12,6 @@ namespace BoardGameStore.Data
         }
         public DbSet<BoardGame> BoardGames { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<Rental> Rentals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
