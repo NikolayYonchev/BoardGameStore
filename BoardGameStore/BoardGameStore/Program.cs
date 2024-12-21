@@ -15,16 +15,16 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+//using (var scope = app.Services.CreateScope())
+//{
+//    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-    if (app.Environment.IsDevelopment())  
-    {
-        context.Database.EnsureDeleted(); 
-        context.Database.EnsureCreated(); 
-    }
-}
+//    if (app.Environment.IsDevelopment())  
+//    {
+//        context.Database.EnsureDeleted(); 
+//        context.Database.EnsureCreated(); 
+//    }
+//}
 
 if (app.Environment.IsDevelopment())
 {
