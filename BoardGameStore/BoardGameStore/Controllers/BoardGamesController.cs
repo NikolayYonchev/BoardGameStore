@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BoardGameStore.Data;
 using BoardGameStore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BoardGameStore.Controllers
 {
@@ -20,6 +21,7 @@ namespace BoardGameStore.Controllers
         }
 
         // GET: BoardGames
+        //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.BoardGames.ToListAsync());

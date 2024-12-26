@@ -20,3 +20,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+.boardgame-image {
+    width: 200px; /* Fixed width */
+    height: 300px; /* Fixed height */
+    object-fit: cover; /* Ensures the image fits the box without distortion */
+    display: block;
+    margin: 0 auto; /* Center-align the image */
+    border: 1px solid #ccc; /* Optional: Add a border for aesthetics */
+    border-radius: 5px; /* Optional: Rounded corners */
+}
+
+
+

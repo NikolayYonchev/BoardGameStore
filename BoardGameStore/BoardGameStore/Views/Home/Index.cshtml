@@ -1,8 +1,36 @@
-﻿@{
+﻿@*@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+*@
+@model IEnumerable<BoardGameStore.Models.BoardGame>
+
+@{
+    ViewData["Title"] = "Board Games";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">Board Games</h1>
+    <div class="row">
+        @foreach (var boardGame in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <!-- Replace 'boardGame.ImageUrl' with the property storing the image path -->
+                    <img class="card-img-top" src="@boardGame.ImageUrl" alt="@boardGame.Title" class="boardgame-image" ;">
+                    <div class="card-body">
+                        <h5 class="card-title">@boardGame.Title</h5>
+                        <p class="card-text">
+                            <strong>Price:</strong> $@boardGame.PurchasePrice
+                        </p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
