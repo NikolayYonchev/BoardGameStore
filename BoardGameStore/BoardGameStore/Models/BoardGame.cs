@@ -53,6 +53,8 @@ namespace BoardGameStore.Models
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Quantity should be more than 0")]
         public int Quantity { get; set; }
+        [Required]
+        public string ImageUrl { get; set; }
 
         [Required]
         public Condition Condition { get; set; }
