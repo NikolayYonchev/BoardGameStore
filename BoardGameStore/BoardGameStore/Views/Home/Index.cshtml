@@ -18,10 +18,10 @@
     <div class="row">
         @foreach (var boardGame in Model)
         {
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4" class="boardgame-container">
                 <div class="card">
                     <!-- Replace 'boardGame.ImageUrl' with the property storing the image path -->
-                    <img class="card-img-top" src="@boardGame.ImageUrl" alt="@boardGame.Title" class="boardgame-image" ;">
+                    <img class="card-img-top" src="@boardGame.ImageUrl" alt="@boardGame.Title";">
                     <div class="card-body">
                         <h5 class="card-title">@boardGame.Title</h5>
                         <p class="card-text">

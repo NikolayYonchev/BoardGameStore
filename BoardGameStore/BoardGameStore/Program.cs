@@ -127,7 +127,7 @@ using (var scope = app.Services.CreateScope())
             new BoardGame
             {
                 Title = "Catan",
-                ImageUrl = "/images/catan.jpeg",
+                ImageUrl = "/images/Catan.png",
                 Category = Category.StrategyGame,
                 MinPlayers = 3,
                 MaxPlayers = 4,
@@ -140,7 +140,7 @@ using (var scope = app.Services.CreateScope())
             new BoardGame
             {
                 Title = "Ticket to Ride",
-                ImageUrl = "/images/ticketToRide.jpeg",
+                ImageUrl = "/images/TicketToRide.jpg",
                 Category = Category.FamilyGame,
                 MinPlayers = 2,
                 MaxPlayers = 5,
@@ -153,7 +153,7 @@ using (var scope = app.Services.CreateScope())
             new BoardGame
             {
                 Title = "Pandemic",
-                ImageUrl = "/images/pandemic.jpg",
+                ImageUrl = "/images/Pandemic.jpg",
                 Category = Category.FamilyGame,
                 MinPlayers = 2,
                 MaxPlayers = 4,
@@ -162,13 +162,52 @@ using (var scope = app.Services.CreateScope())
                 PurchasePrice = 49.99m,
                 Quantity = 8,
                 Condition = Condition.LikeNew
+            },
+            new BoardGame
+            {
+                Title = "Wingspan",
+                ImageUrl = "/images/Wingspan.png",
+                Category = Category.StrategyGame,
+                MinPlayers = 2,
+                MaxPlayers = 5,
+                Description = "Wingspan is a competitive, medium-weight, card-driven, engine-building board game.",
+                RentalPricePerDay = 9.99m,
+                PurchasePrice = 59.99m,
+                Quantity = 3,
+                Condition = Condition.LikeNew
+            },
+            new BoardGame
+            {
+                Title = "7 Wonders",
+                ImageUrl = "/images/7Wonders.jpg",
+                Category = Category.StrategyGame,
+                MinPlayers = 2,
+                MaxPlayers = 7,
+                Description = "Gather resources, develop commercial routes, and affirm your military supremacy.",
+                RentalPricePerDay = 4.99m,
+                PurchasePrice = 49.99m,
+                Quantity = 1,
+                Condition = Condition.Used
+            },
+            new BoardGame
+            {
+                Title = "Root",
+                ImageUrl = "/images/Root.jpg",
+                Category = Category.StrategyGame,
+                MinPlayers = 2,
+                MaxPlayers = 4,
+                Description = "A game of adventure and war in which 2 to 4 players battle for control of a vast wilderness.",
+                RentalPricePerDay = 4.99m,
+                PurchasePrice = 49.99m,
+                Quantity = 1,
+                Condition = Condition.Used
             }
         );
 
         await dbContext.SaveChangesAsync();
     }
+    
 }
-
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();

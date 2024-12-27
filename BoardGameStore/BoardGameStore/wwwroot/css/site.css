@@ -20,7 +20,7 @@ html {
 body {
   margin-bottom: 60px;
 }
-.boardgame-image {
+.boardgame-container {
     width: 200px; /* Fixed width */
     height: 300px; /* Fixed height */
     object-fit: cover; /* Ensures the image fits the box without distortion */

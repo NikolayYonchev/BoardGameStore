@@ -56,7 +56,7 @@ namespace BoardGameStore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BoardGameId,Title,Category,MinPlayers,MaxPlayers,Description,RentalPricePerDay,PurchasePrice,Quantity,Condition")] BoardGame boardGame)
+        public async Task<IActionResult> Create(BoardGame boardGame)
         {
             if (ModelState.IsValid)
             {

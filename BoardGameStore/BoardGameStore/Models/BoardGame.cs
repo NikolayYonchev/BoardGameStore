@@ -1,6 +1,7 @@
 ﻿using BoardGameStore.Models.Enums;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BoardGameStore.Models
 {
@@ -53,8 +54,9 @@ namespace BoardGameStore.Models
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Quantity should be more than 0")]
         public int Quantity { get; set; }
-        [Required]
-        public string ImageUrl { get; set; }
+        [NotMapped]
+        public IFormFile? Image { get; set; }
+        public string? ImageUrl { get; set; }
 
         [Required]
         public Condition Condition { get; set; }
