@@ -19,6 +19,11 @@ namespace BoardGameStore.Models
         public string UserId { get; set; }
 
         [Required]
+        [ForeignKey("Order")]
+        public int OrderId { get; set; }
+
+
+        [Required]
         public DateTime RentalDate { get; set; }
 
         [Required]
@@ -42,6 +47,8 @@ namespace BoardGameStore.Models
         public Status Status { get; set; }
 
         public BoardGame BoardGame { get; set; }
+
+        public Order Order { get; set; }
 
         public User User { get; set; }
     }
