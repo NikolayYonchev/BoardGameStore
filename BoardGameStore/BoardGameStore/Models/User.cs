@@ -9,6 +9,7 @@ namespace BoardGameStore.Models
         {
             Rentals = new HashSet<Rental>();
             Purchases = new HashSet<Purchase>();
+            Orders = new HashSet<Order>();
         }
 
         //[Required]
@@ -17,5 +18,7 @@ namespace BoardGameStore.Models
 
         public ICollection<Rental> Rentals { get; set; }
         public ICollection<Purchase> Purchases { get; set; }
+        public ICollection<Order> Orders { get; set; }
+       
     }
 }

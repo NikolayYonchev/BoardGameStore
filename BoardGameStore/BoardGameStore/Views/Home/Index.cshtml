@@ -13,6 +13,10 @@
     ViewData["Title"] = "Board Games";
 }
 
+@{
+    ViewData["Title"] = "Rental";
+}
+
 <div class="container mt-4">
     <h1 class="text-center">Board Games</h1>
     <div class="row">
@@ -27,7 +31,8 @@
                         <p class="card-text">
                             <strong>Price:</strong> $@boardGame.PurchasePrice
                         </p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                        <a href="#" class="btn btn-primary">Rent</a>
                     </div>
                 </div>
             </div>

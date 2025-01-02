@@ -29,6 +29,12 @@ namespace BoardGameStore.Data
                 .WithMany(u => u.Rentals)
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(p => p.User)
+                .WithMany(u => u.Orders)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
