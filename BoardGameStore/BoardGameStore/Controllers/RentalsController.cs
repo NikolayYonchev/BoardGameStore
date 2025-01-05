@@ -18,44 +18,30 @@ namespace BoardGameStore.Controllers
             _context = context;
         }
 
-        // GET: Rentals
-        public async Task<IActionResult> Index()
+        // GET
+        [HttpGet]
+        public async Task<IActionResult> Index(int? id)
         {
-            var rentals = await _context.Rentals.Include(r => r.BoardGame).Include(r => r.User).ToListAsync();
-            return View(rentals);
-        }
-
-        // GET: Rentals/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Rentals/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Rental rental)
-        {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                // Validate that the return date is after the rental date
-                if (rental.ReturnDate <= rental.RentalDate)
-                {
-                    ModelState.AddModelError("ReturnDate", "Return date must be after the rental date.");
-                    return View(rental);
-                }
-
-                rental.Status = Status.Available; // Set initial status to "Active"
-                _context.Add(rental);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
+
+            var rental = await _context.Rentals
+                .Include(r => r.BoardGame)
+                .Include(r => r.User)
+                .FirstOrDefaultAsync(m => m.RentalId == id);
+            if (rental == null)
+            {
+                return NotFound();
+            }
+
             return View(rental);
         }
 
         // POST: Rentals/Return
         [HttpPost]
-        public async Task<IActionResult> Return(int rentalId)
+        public async Task<IActionResult> Submit(int rentalId, DateTime rentalDate, DateTime returnDate)
         {
             var rental = await _context.Rentals.FindAsync(rentalId);
             if (rental == null)
@@ -75,26 +61,6 @@ namespace BoardGameStore.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
-        }
-
-        // GET: Rentals/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var rental = await _context.Rentals
-                .Include(r => r.BoardGame)
-                .Include(r => r.User)
-                .FirstOrDefaultAsync(m => m.RentalId == id);
-            if (rental == null)
-            {
-                return NotFound();
-            }
-
-            return View(rental);
         }
     }
 }

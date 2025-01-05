@@ -7,7 +7,7 @@
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 *@
-@model IEnumerable<BoardGameStore.Models.BoardGame>
+@model IEnumerable<BoardGameStore.Models.BoardGame> 
 
 @{
     ViewData["Title"] = "Board Games";
@@ -32,7 +32,7 @@
                             <strong>Price:</strong> $@boardGame.PurchasePrice
                         </p>
                         <a href="#" class="btn btn-primary">Buy</a>
-                        <a href="#" class="btn btn-primary">Rent</a>
+                        <a asp-controller="Rentals" asp-action="Index" asp-route-boardGameId="@boardGame.BoardGameId" class="btn btn-primary">Rent</a>
                     </div>
                 </div>
             </div>
