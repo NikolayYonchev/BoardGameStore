@@ -1,25 +1,26 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
 .boardgame-container {
     width: 200px; /* Fixed width */
     height: 300px; /* Fixed height */
@@ -30,5 +31,19 @@ body {
     border-radius: 5px; /* Optional: Rounded corners */
 }
 
-
-
+.small-image {
+    max-height: 300px;
+    width: auto;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    float: left;
+    margin-left: 10px;
+}
+/*.small-image {
+    float: left;*/ /* Moves the image to the left */
+    /*margin-right: 20px;*/ /* Adds space to the right of the image */
+    /*max-height: 300px;*/ /* Optional: Limit the height */
+    /*object-fit: cover;*/ /* Ensures the image maintains aspect ratio */
+    /*display: block;*/ /* Ensures proper layout behavior */
+/*}*/

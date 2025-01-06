@@ -4,9 +4,32 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>@Model.BoardGame.Title</h1>
+<div class="container mt-4">
+    <h1 class="text-center">Rent Board Game</h1>
+    <div class="card">
+        <img src="@Model.BoardGame.ImageUrl" alt="@Model.BoardGame.Title" class="small-image">
+        <div class="card-body">
+            <h5 class="card-title">@Model.BoardGame.Title</h5>
+            <div class="form-group mt-3">
+                <label for="rentalEndDate">End Date</label>
+                <input type="date" id="rentalEndDate" name="RentalEndDate" class="form-control" required>
+            </div>
+            <p class="card-text">
+                <strong>Price:</strong> $@Model.BoardGame.PurchasePrice<br>
+                <strong>Description:</strong> @Model.BoardGame.Description<br />
+                <strong>Quantity:</strong> @Model.BoardGame.Quantity<br />
+            </p>
+            <form asp-action="ConfirmRental" asp-controller="Rental" method="post">
+                <input type="hidden" name="BoardGameId" value="@Model.BoardGameId" />
+                <button type="submit" class="btn btn-success">Confirm Rental</button>
+                <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+@*<h1>@Model.BoardGame.Title</h1>*@
 
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -28,6 +51,7 @@
         </tr>
     </thead>
     <tbody>
+*@
 @* @foreach (var item in Model) {
         <tr>
             <td>

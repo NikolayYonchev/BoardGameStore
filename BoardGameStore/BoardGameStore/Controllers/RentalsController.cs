@@ -20,17 +20,16 @@ namespace BoardGameStore.Controllers
 
         // GET
         [HttpGet]
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index(int boardGameId)
         {
-            if (id == null)
+            /*if (boardGameId == null)
             {
                 return NotFound();
-            }
-
+            }*/
+            //trqbva rental da vrushta rental no trqbva da zareda board game
             var rental = await _context.Rentals
-                .Include(r => r.BoardGame)
-                .Include(r => r.User)
-                .FirstOrDefaultAsync(m => m.RentalId == id);
+                .Include(x => x.BoardGame)
+                .FirstOrDefaultAsync(b=>b.BoardGame.BoardGameId == boardGameId);
             if (rental == null)
             {
                 return NotFound();
