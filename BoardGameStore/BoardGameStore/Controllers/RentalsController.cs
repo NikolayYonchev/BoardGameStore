@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using BoardGameStore.Models.Enums;
+using BoardGameStore.ViewModels;
 
 namespace BoardGameStore.Controllers
 {
@@ -22,31 +23,45 @@ namespace BoardGameStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int boardGameId)
         {
-            /*if (boardGameId == null)
+            
+            var boardGame = await _context.BoardGames
+                 //.Include(x => x.BoardGame)
+                 .FirstOrDefaultAsync(b => b.BoardGameId == boardGameId);
+            
+            var rentalViewModel = new RentalViewModel
             {
-                return NotFound();
-            }*/
-            //trqbva rental da vrushta rental no trqbva da zareda board game
-            var rental = await _context.Rentals
-                .Include(x => x.BoardGame)
-                .FirstOrDefaultAsync(b=>b.BoardGame.BoardGameId == boardGameId);
-            if (rental == null)
-            {
-                return NotFound();
-            }
+                BoardGameId = boardGame.BoardGameId,
+                Title = boardGame.Title,
+                ImageUrl = boardGame.ImageUrl,
+                Condition = boardGame.Condition,
+                Description = boardGame.Description,
+                RentalPricePerDay = boardGame.RentalPricePerDay
+            };
 
-            return View(rental);
+            return View(rentalViewModel);
         }
 
         // POST: Rentals/Return
         [HttpPost]
-        public async Task<IActionResult> Submit(int rentalId, DateTime rentalDate, DateTime returnDate)
+        public async Task<IActionResult> Submit(RentalInputModel model)
         {
-            var rental = await _context.Rentals.FindAsync(rentalId);
-            if (rental == null)
+            _context.Add(new Rental
             {
-                return NotFound();
-            }
+                BoardGameId = model.BoardGameId,
+                UserId = this.User.Identity.Name,
+                RentalDate = DateTime.Now,
+                Status = Status.Available
+            });
+            var boardGame = await _context.BoardGames.FindAsync(model.BoardGameId);
+            var rental = new Rental()
+            {
+                BoardGameId = model.BoardGameId,
+                UserId = this.User.Identity.Name,
+                RentalDate = DateTime.Now,
+                Status = Status.Available
+            };
+            _context.Rentals.Add(rental);
+            _context.SaveChanges();
 
             if (rental.Status != Status.Available)
             {

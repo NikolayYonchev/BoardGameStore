@@ -27,6 +27,12 @@ namespace BoardGameStore.Controllers
             return View(await _context.BoardGames.ToListAsync());
         }
 
+        // id allows nullable, but checks if null afterwards => no need for the ? operator
+
+        //logic inside controller => move to a service, check out dependency injection
+
+
+
         // GET: BoardGames/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -51,6 +57,8 @@ namespace BoardGameStore.Controllers
             return View();
         }
 
+        // move logic to service
+
         // POST: BoardGames/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -67,6 +75,8 @@ namespace BoardGameStore.Controllers
             return View(boardGame);
         }
 
+        // similar to details action
+
         // GET: BoardGames/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -82,6 +92,9 @@ namespace BoardGameStore.Controllers
             }
             return View(boardGame);
         }
+        
+        // do not use magic strings
+        // logic should be inside controller
 
         // POST: BoardGames/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -118,16 +131,18 @@ namespace BoardGameStore.Controllers
             return View(boardGame);
         }
 
-        // GET: BoardGames/Delete/5
+        // GET: BoardGames/Delete/5\
+        // use this -> [HttpDelete]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
+            // add delete
             var boardGame = await _context.BoardGames
                 .FirstOrDefaultAsync(m => m.BoardGameId == id);
+
             if (boardGame == null)
             {
                 return NotFound();

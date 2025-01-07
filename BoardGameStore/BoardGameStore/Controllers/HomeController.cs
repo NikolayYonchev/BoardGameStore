@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using BoardGameStore.Data;
 using BoardGameStore.Models;
+using BoardGameStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGameStore.Controllers
