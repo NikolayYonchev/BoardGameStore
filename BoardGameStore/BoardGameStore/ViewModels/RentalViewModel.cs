@@ -10,7 +10,6 @@ namespace BoardGameStore.ViewModels
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public Condition Condition { get; set; }
-        public DateTime RentalDate { get; set; }
         public DateTime ReturnDate { get; set; }
         public decimal RentalPricePerDay { get; set; }
     }
