@@ -10,20 +10,26 @@
 		<h2 class="card-title">@Model.Title</h2>
 		<img src="@Model.ImageUrl" alt="@Model.Title" class="small-image">
 		<div class="card-body">
-			<div class="form-group mt-3">
-				<strong>Rental Date:</strong> @DateTime.UtcNow.ToString("MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture)<br>
-			</div>
-			<div class="form-group mt-3">
-				<label for="rentalEndDate">End Date</label>
-				<input type="date" id="rentalEndDate" name="RentalEndDate" class="form-control" required>
-			</div>
+            <div class="form-group mt-3">
+                <strong>Rental Start Date:</strong> @DateTime.UtcNow.ToString("MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture)<br>
+            </div>
+            <div class="form-group mt-3">
+                <label for="rentalEndDate">Rental End Date</label>
+                <input type="date" id="rentalEndDate" name="RentalEndDate" class="form-control" required>
+            </div>
+            <br>
 			<p class="card-text">
-				<strong>Rental Price:</strong> $@Model.RentalPricePerDay<br>
+				@* <div id="rentalPricePerDay" data-price="@Model.RentalPricePerDay">
+					Rental Price Per Day: $@Model.RentalPricePerDay<br>
+				</div> *@
+				<div id="rentalPricePerDay" data-price="@Model.RentalPricePerDay">
+					<strong>Rental Price Per Day:</strong> $@Model.RentalPricePerDay<br>
+				</div>
 				<strong>Description:</strong> @Model.Description<br />
 				<strong>Condition:</strong> @Model.Condition<br />
 			</p>
 			<p class="card-text">
-				<strong>Total:</strong> @Model.RentalPricePerDay*<br>
+                <strong>Total:</strong> <span id="totalAmount">0</span><br>
 			</p>
 			<form asp-action="Submit" asp-controller="Rental" method="post">
 				<input type="hidden" name="BoardGameId" value="@Model.BoardGameId" />
@@ -33,55 +39,4 @@
 		</div>
 	</div>
 </div>
-@*<h1>@Model.BoardGame.Title</h1>*@
-
-@*<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RentalDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReturnDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BoardGame)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-*@
-@* @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RentalDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReturnDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BoardGame.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.RentalId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RentalId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RentalId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
- *@
+<script src="~/js/site.js"></script>
