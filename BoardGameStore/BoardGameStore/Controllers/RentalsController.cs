@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BoardGameStore.Models.Enums;
 using BoardGameStore.ViewModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace BoardGameStore.Controllers
 {
