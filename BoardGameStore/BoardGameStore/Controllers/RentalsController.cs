@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using BoardGameStore.Models.Enums;
 using BoardGameStore.ViewModels;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace BoardGameStore.Controllers
 {
@@ -44,38 +45,26 @@ namespace BoardGameStore.Controllers
 
         // POST: Rentals/Return
         [HttpPost]
-        public async Task<IActionResult> Submit(RentalInputModel model)
+        public async Task<IActionResult> Submit(RentalInputModel rentalInputModel)
         {
-            _context.Add(new Rental
-            {
-                BoardGameId = model.BoardGameId,
-                UserId = this.User.Identity.Name,
-                RentalDate = DateTime.Now,
-                Status = Status.Available
-            });
-            var boardGame = await _context.BoardGames.FindAsync(model.BoardGameId);
+            //TODO
             var rental = new Rental()
             {
-                BoardGameId = model.BoardGameId,
-                UserId = this.User.Identity.Name,
-                RentalDate = DateTime.Now,
-                Status = Status.Available
+                BoardGameId = rentalInputModel.BoardGameId,
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier), // Assuming user is authenticated
+                RentalDate = DateTime.UtcNow,
+                ReturnDate = rentalInputModel.ReturnDate,
+                
             };
             _context.Rentals.Add(rental);
             _context.SaveChanges();
 
-            if (rental.Status != Status.Available)
-            {
-                return BadRequest("This rental is not currently Available.");
-            }
+            return RedirectToAction("Confirm");
+        }
 
-            rental.ReturnDate = DateTime.Now;
-            rental.Status = Status.Returned;
-
-            _context.Update(rental);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
+        public async Task<IActionResult> Confirm()
+        {
+            return View();
         }
     }
 }

@@ -31,7 +31,7 @@
 			<p class="card-text">
                 <strong>Total:</strong> <span id="totalAmount">0</span><br>
 			</p>
-			<form asp-action="Submit" asp-controller="Rental" method="post">
+			<form asp-action="Submit" asp-controller="Rentals" method="post">
 				<input type="hidden" name="BoardGameId" value="@Model.BoardGameId" />
 				<button type="submit" class="btn btn-success">Confirm Rental</button>
 				<a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Cancel</a>

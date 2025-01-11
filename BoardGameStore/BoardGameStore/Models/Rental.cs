@@ -45,12 +45,12 @@ namespace BoardGameStore.Models
             }
         }
 
-        [Required]
-        public Status Status { get; set; }
+        //[Required]
+        //public Status Status { get; set; }
 
         public BoardGame BoardGame { get; set; }
 
-        public Order Order { get; set; }
+        //public Order Order { get; set; }
 
         public User User { get; set; }
     }
