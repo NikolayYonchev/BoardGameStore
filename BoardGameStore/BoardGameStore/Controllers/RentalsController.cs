@@ -25,14 +25,16 @@ namespace BoardGameStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int boardGameId)
         {
-            
+
             var boardGame = await _context.BoardGames
                  //.Include(x => x.BoardGame)
                  .FirstOrDefaultAsync(b => b.BoardGameId == boardGameId);
-            
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
             var rentalViewModel = new RentalViewModel
             {
                 BoardGameId = boardGame.BoardGameId,
+                UserId = userId,
                 Title = boardGame.Title,
                 ImageUrl = boardGame.ImageUrl,
                 Condition = boardGame.Condition,
@@ -51,17 +53,17 @@ namespace BoardGameStore.Controllers
             var rental = new Rental()
             {
                 BoardGameId = rentalInputModel.BoardGameId,
-                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier), // Assuming user is authenticated
+                UserId = rentalInputModel.UserId, // Assuming user is authenticated
                 RentalDate = DateTime.UtcNow,
                 ReturnDate = rentalInputModel.ReturnDate,
-                
+
             };
             _context.Rentals.Add(rental);
             _context.SaveChanges();
 
             return RedirectToAction("Confirm");
         }
-
+        [HttpGet]
         public async Task<IActionResult> Confirm()
         {
             return View();

@@ -19,7 +19,15 @@ namespace BoardGameStore.Controllers
 
         public IActionResult Index()
         {
+            // Get the logged-in user's ID
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            // Get the list of board games
             var boardGames = _context.BoardGames.ToList();
+
+            // Pass the user ID to the view
+            ViewBag.UserId = userId;
+
             return View(boardGames);
         }
 

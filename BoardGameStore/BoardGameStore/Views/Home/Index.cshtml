@@ -32,7 +32,8 @@
                             <strong>Price:</strong> $@boardGame.PurchasePrice
                         </p>
                         <a href="#" class="btn btn-primary">Buy</a>
-                        <a asp-controller="Rentals" asp-action="Index" asp-route-boardGameId="@boardGame.BoardGameId" class="btn btn-primary">Rent</a>
+                        <a asp-controller="Rentals" asp-action="Index" asp-route-boardGameId="@boardGame.BoardGameId"
+                        asp-route-userId="@ViewBag.UserId" class="btn btn-primary">Rent</a>
                     </div>
                 </div>
             </div>

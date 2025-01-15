@@ -28,10 +28,10 @@ var serviceProvider = serviceScope.ServiceProvider;
 var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
 //dbContext.Database.Migrate();
 
-dbContext.Database.EnsureDeleted();
+/*dbContext.Database.EnsureDeleted();
 dbContext.Database.EnsureCreated();
-
-using (var scope = app.Services.CreateScope())
+*/
+/*using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
@@ -77,7 +77,7 @@ using (var scope = app.Services.CreateScope())
     {
         await userManager.AddToRoleAsync(user, "User");
     }
-}
+}*/
 dbContext.Database.EnsureDeleted();
 dbContext.Database.EnsureCreated();
 
