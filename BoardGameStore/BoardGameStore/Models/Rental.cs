@@ -6,7 +6,7 @@ namespace BoardGameStore.Models
 {
     public class Rental
     {
-        private DateTime returnDate;
+        private DateTime? returnDate;
 
         [Required]
         [Key]
@@ -20,16 +20,11 @@ namespace BoardGameStore.Models
         [ForeignKey("User")]
         public string UserId { get; set; }
 
-        //[Required]
-        //[ForeignKey("Order")]
-        //public int OrderId { get; set; }
-
-
         [Required]
         public DateTime RentalDate { get; set; }
 
         [Required]
-        public DateTime? ReturnDate
+		/*public DateTime? ReturnDate
         {
             get
             {
@@ -41,14 +36,29 @@ namespace BoardGameStore.Models
                 {
                     throw new InvalidDataException("The return date cannot be before rental date.");
                 }
-                ReturnDate = value;
+				returnDate = value;
             }
-        }
+        }*/
+		public DateTime? ReturnDate
+		{
+			get
+			{
+				return returnDate;
+			}
+			set
+			{
+				if (value < RentalDate)
+				{
+					throw new InvalidDataException("The return date cannot be before rental date.");
+				}
+				returnDate = value;
+			}
+		}
 
-        //[Required]
-        //public Status Status { get; set; }
+		//[Required]
+		//public Status Status { get; set; }
 
-        public BoardGame BoardGame { get; set; }
+		public BoardGame BoardGame { get; set; }
 
         //public Order Order { get; set; }
 

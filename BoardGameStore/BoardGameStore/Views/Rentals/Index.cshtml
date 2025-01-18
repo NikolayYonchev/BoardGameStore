@@ -4,39 +4,39 @@
 	ViewData["Title"] = "Index";
 }
 
-<div class="container mt-4">
-	<h1 class="text-center">Rent Board Game</h1>
-	<div class="card">
-		<h2 class="card-title">@Model.Title</h2>
-		<img src="@Model.ImageUrl" alt="@Model.Title" class="small-image">
-		<div class="card-body">
-            <div class="form-group mt-3">
-                <strong>Rental Start Date:</strong> @DateTime.UtcNow.ToString("MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture)<br>
-            </div>
-            <div class="form-group mt-3">
-                <label for="rentalEndDate">Rental End Date</label>
-                <input type="date" id="rentalEndDate" name="RentalEndDate" class="form-control" required>
-            </div>
-            <br>
-			<p class="card-text">
-				@* <div id="rentalPricePerDay" data-price="@Model.RentalPricePerDay">
-					Rental Price Per Day: $@Model.RentalPricePerDay<br>
-				</div> *@
-				<div id="rentalPricePerDay" data-price="@Model.RentalPricePerDay">
-					<strong>Rental Price Per Day:</strong> $@Model.RentalPricePerDay<br>
+<form asp-action="Submit" asp-controller="Rentals" method="post">
+	<div class="container mt-4">
+		<h1 class="text-center">Rent Board Game</h1>
+		<div class="card">
+			<h2 class="card-title">@Model.Title</h2>
+			<img src="@Model.ImageUrl" alt="@Model.Title" class="small-image">
+			<div class="card-body">
+				<div class="form-group mt-3">
+					<strong>Rental Start Date:</strong> @DateTime.UtcNow.ToString("MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture)<br>
 				</div>
-				<strong>Description:</strong> @Model.Description<br />
-				<strong>Condition:</strong> @Model.Condition<br />
-			</p>
-			<p class="card-text">
-                <strong>Total:</strong> <span id="totalAmount">0</span><br>
-			</p>
-			<form asp-action="Submit" asp-controller="Rentals" method="post">
+				<div class="form-group mt-3">
+					<label for="rentalEndDate">Rental End Date</label>
+					<input type="date" id="rentalEndDate" name="RentalEndDate" class="form-control" required>
+				</div>
+				<br>
+				<p class="card-text">
+					@* <div id="rentalPricePerDay" data-price="@Model.RentalPricePerDay">
+					Rental Price Per Day: $@Model.RentalPricePerDay<br>
+					</div> *@
+					<div id="rentalPricePerDay" data-price="@Model.RentalPricePerDay">
+						<strong>Rental Price Per Day:</strong> $@Model.RentalPricePerDay<br>
+					</div>
+					<strong>Description:</strong> @Model.Description<br />
+					<strong>Condition:</strong> @Model.Condition<br />
+				</p>
+				<p class="card-text">
+					<strong>Total:</strong> <span id="totalAmount">0</span><br>
+				</p>
 				<input type="hidden" name="BoardGameId" value="@Model.BoardGameId" />
 				<button type="submit" class="btn btn-success">Confirm Rental</button>
 				<a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Cancel</a>
-			</form>
+			</div>
 		</div>
 	</div>
-</div>
+</form>
 <script src="~/js/rentals.js" asp-append-version="true"></script>
