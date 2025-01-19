@@ -13,7 +13,6 @@ namespace BoardGameStore.Data
         public DbSet<BoardGame> BoardGames { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Rental> Rentals { get; set; }
-        public DbSet<Order> Orders { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -30,11 +29,6 @@ namespace BoardGameStore.Data
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Order>()
-                .HasOne(p => p.User)
-                .WithMany(u => u.Orders)
-                .HasForeignKey(p => p.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

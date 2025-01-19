@@ -10,6 +10,7 @@ namespace BoardGameStore.ViewModels
 
         public int BoardGameId { get; set; }
         public DateTime RentalEndDate { get; set; }
+
         //public Status Status { get; set; }
     }
 }

@@ -32,6 +32,5 @@ namespace BoardGameStore.Models
 
         public BoardGame BoardGame { get; set; }
 
-        public Order Order { get; set; }
     }
 }

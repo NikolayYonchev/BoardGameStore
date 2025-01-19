@@ -26,7 +26,6 @@ namespace BoardGameStore.Controllers
 		public async Task<IActionResult> Index(int boardGameId)
 		{
 			var boardGame = await _context.BoardGames
-				 //.Include(x => x.BoardGame)
 				 .FirstOrDefaultAsync(b => b.BoardGameId == boardGameId);
 			var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
@@ -49,6 +48,8 @@ namespace BoardGameStore.Controllers
 		public async Task<IActionResult> Submit(RentalInputModel rentalInputModel)
 		{
 			//TODO
+			var boardGame = await _context.BoardGames
+				 .FirstOrDefaultAsync(b => b.BoardGameId == rentalInputModel.BoardGameId);
 			var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 			var rental = new Rental()
 			{
@@ -56,17 +57,29 @@ namespace BoardGameStore.Controllers
 				UserId = userId,
 				RentalDate = DateTime.UtcNow,
 				ReturnDate = rentalInputModel.RentalEndDate,
+				Total = (rentalInputModel.RentalEndDate.Day- DateTime.UtcNow.Day)*boardGame.RentalPricePerDay
 			};
 			_context.Rentals.Add(rental);
 			_context.SaveChanges();
-			//if remember me btn is ticked when logging in the return will fail because the userId will be different
-			return RedirectToAction(nameof(Confirm));
+			var rentalOutput = new RentalOutputModel
+			{
+				BoardGameId = rental.BoardGameId ,
+				Total = rental.Total,
+				UserId= userId,
+				ReturnDate= rental.ReturnDate,
+				Title = boardGame.Title
+			};
+			//if remember me btn is checked when logging in the return will fail because the userId will be different
+			return RedirectToAction(nameof(Confirm),rentalOutput);
+			//Rentals/Confirm/1
+			//Rentals/Confirm?id=1
 		}
 		[HttpGet]
-		public async Task<IActionResult> Confirm()
+		public async Task<IActionResult> Confirm(RentalOutputModel outputModel)
 		{
 			// rentalviewmodel must be returned
-			return View();
+
+			return View(outputModel);
 		}
 	}
 }

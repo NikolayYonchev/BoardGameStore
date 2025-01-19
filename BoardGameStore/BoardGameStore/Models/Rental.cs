@@ -6,7 +6,7 @@ namespace BoardGameStore.Models
 {
     public class Rental
     {
-        private DateTime? returnDate;
+        private DateTime returnDate;
 
         [Required]
         [Key]
@@ -23,7 +23,6 @@ namespace BoardGameStore.Models
         [Required]
         public DateTime RentalDate { get; set; }
 
-        [Required]
 		/*public DateTime? ReturnDate
         {
             get
@@ -39,7 +38,8 @@ namespace BoardGameStore.Models
 				returnDate = value;
             }
         }*/
-		public DateTime? ReturnDate
+        
+		public DateTime ReturnDate
 		{
 			get
 			{
@@ -54,13 +54,14 @@ namespace BoardGameStore.Models
 				returnDate = value;
 			}
 		}
+        [Required]
+        public decimal Total { get; set; }
 
-		//[Required]
-		//public Status Status { get; set; }
+        //[Required]
+        //public Status Status { get; set; }
 
-		public BoardGame BoardGame { get; set; }
+        public BoardGame BoardGame { get; set; }
 
-        //public Order Order { get; set; }
 
         public User User { get; set; }
     }
