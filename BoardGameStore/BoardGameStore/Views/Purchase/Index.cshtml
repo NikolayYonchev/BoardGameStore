@@ -1,0 +1,41 @@
+﻿@model BoardGameStore.Models.BoardGame
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<form asp-action="Submit" asp-controller="Rentals" method="post">
+	<div class="container mt-4">
+		<h1 class="text-center">Purchase Board Game</h1>
+		<div class="card">
+			<h2 class="card-title">@Model.Title</h2>
+			<img src="@Model.ImageUrl" alt="@Model.Title" class="small-image">
+			<div class="card-body">
+				<br>
+				<p class="card-text">
+					<strong>
+						Quantity:
+						<select id="quantity" name="quantity" class="form-select">
+							@for (int i = 1; i <= Model.Quantity; i++)
+							{
+								<option value="@i">@i</option>
+							}
+						</select>
+					</strong>
+					<strong>Description:</strong> @Model.Description<br />
+					<strong>MinPlayers:</strong> @Model.MinPlayers<br />
+					<strong>MaxPlayers:</strong> @Model.MaxPlayers<br />
+					<strong>Condition:</strong> @Model.Condition<br />
+					<strong>Price:</strong> <span id="purchasePrice">@Model.PurchasePrice</span><br />
+				</p>
+				<p class="card-text">
+					<strong>Total:</strong> <span id="totalAmount">0</span><br>
+				</p>
+				<input type="hidden" name="BoardGameId" value="@Model.BoardGameId" />
+				<button type="submit" class="btn btn-success">Purchase</button>
+				<a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Cancel</a>
+			</div>
+		</div>
+	</div>
+</form>
+<script src="~/js/purchase.js" asp-append-version="true"></script>

@@ -8,13 +8,12 @@
 } *@
 
 <div class="container mt-4">
-    <h1 class="text-center text-success">Rental Confirmed!</h1>
+    <h1 class="text-center text-success">Rental Successful!</h1>
     <div class="card mt-4">
         <div class="card-body text-center">
             <h2>Thank you for renting!</h2>
             <p>Your rental for <strong>@Model.Title</strong> has been successfully processed.</p>
             <p><strong>Rental Period:</strong> @DateTime.UtcNow.ToString("MM/dd/yyyy") to @Model.ReturnDate.ToString("MM/dd/yyyy")</p>
-            <p><strong>User ID:</strong> @Model.UserId</p>
             <p><strong>Total Cost:</strong> $@Model.Total</p>
             <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Return to Home</a>
         </div>

@@ -18,7 +18,5 @@ namespace BoardGameStore.ViewModels
             get {return (RentalPricePerDay * (ReturnDate.Day - DateTime.Today.Day)); }
         }
 
-        
-     
     }
 }

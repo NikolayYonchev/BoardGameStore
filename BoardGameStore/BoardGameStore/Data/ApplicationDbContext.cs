@@ -29,6 +29,9 @@ namespace BoardGameStore.Data
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<BoardGame>()
+                .HasQueryFilter(s => s.Status != Models.Enums.Status.Unavailable);
+
         }
     }
 }

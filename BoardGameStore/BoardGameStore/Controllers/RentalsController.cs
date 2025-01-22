@@ -59,8 +59,14 @@ namespace BoardGameStore.Controllers
 				ReturnDate = rentalInputModel.RentalEndDate,
 				Total = (rentalInputModel.RentalEndDate.Day- DateTime.UtcNow.Day)*boardGame.RentalPricePerDay
 			};
+			boardGame.Quantity--;
+			if (boardGame.Quantity<=0)
+			{
+				boardGame.Status = Status.Unavailable;
+			}
 			_context.Rentals.Add(rental);
 			_context.SaveChanges();
+			
 			var rentalOutput = new RentalOutputModel
 			{
 				BoardGameId = rental.BoardGameId ,

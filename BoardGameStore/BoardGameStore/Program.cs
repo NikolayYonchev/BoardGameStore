@@ -138,7 +138,8 @@ using (var scope = app.Services.CreateScope())
                 RentalPricePerDay = 5.99m,
                 PurchasePrice = 45.99m,
                 Quantity = 10,
-                Condition = Condition.LikeNew
+                Condition = Condition.LikeNew,
+                Status = Status.Available
             },
             new BoardGame
             {
@@ -151,7 +152,8 @@ using (var scope = app.Services.CreateScope())
                 RentalPricePerDay = 4.99m,
                 PurchasePrice = 39.99m,
                 Quantity = 15,
-                Condition = Condition.New
+                Condition = Condition.New,
+                Status = Status.Available
             },
             new BoardGame
             {
@@ -164,7 +166,8 @@ using (var scope = app.Services.CreateScope())
                 RentalPricePerDay = 6.99m,
                 PurchasePrice = 49.99m,
                 Quantity = 8,
-                Condition = Condition.LikeNew
+                Condition = Condition.LikeNew,
+                Status = Status.Available
             },
             new BoardGame
             {
@@ -177,7 +180,8 @@ using (var scope = app.Services.CreateScope())
                 RentalPricePerDay = 9.99m,
                 PurchasePrice = 59.99m,
                 Quantity = 3,
-                Condition = Condition.LikeNew
+                Condition = Condition.LikeNew,
+                Status = Status.Available
             },
             new BoardGame
             {
@@ -190,7 +194,8 @@ using (var scope = app.Services.CreateScope())
                 RentalPricePerDay = 4.99m,
                 PurchasePrice = 49.99m,
                 Quantity = 1,
-                Condition = Condition.Used
+                Condition = Condition.Used,
+                Status = Status.Available
             },
             new BoardGame
             {
@@ -203,7 +208,22 @@ using (var scope = app.Services.CreateScope())
                 RentalPricePerDay = 4.99m,
                 PurchasePrice = 49.99m,
                 Quantity = 1,
-                Condition = Condition.Used
+                Condition = Condition.Used,
+                Status = Status.Available
+            },
+            new BoardGame
+            {
+                Title = "Root2",
+                ImageUrl = "/images/Root.jpg",
+                Category = Category.StrategyGame,
+                MinPlayers = 2,
+                MaxPlayers = 4,
+                Description = "A game of adventure and war in which 2 to 4 players battle for control of a vast wilderness.",
+                RentalPricePerDay = 4.99m,
+                PurchasePrice = 49.99m,
+                Quantity = 1,
+                Condition = Condition.Used,
+                Status = Status.Unavailable
             }
         );
 

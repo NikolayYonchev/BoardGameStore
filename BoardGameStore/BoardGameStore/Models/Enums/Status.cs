@@ -4,6 +4,7 @@
     {
         Pending = 1,
         Available = 2,
-        Returned = 10
+        Returned = 10,
+        Unavailable = 20
     }
 }

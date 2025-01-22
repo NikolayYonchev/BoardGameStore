@@ -18,15 +18,13 @@ namespace BoardGameStore.Models
         public int BoardGameId { get; set; }
 
         [Required]
-        [ForeignKey("Order")]
-        public int OrderId { get; set; }
-
-        [Required]
         public DateTime PurchaseDate { get; set; }
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Purchase quantity must be at least 1.")]
         public int PurchaseQuantity { get; set; }
+
+        public decimal Total { get; set; }
 
         public User User { get; set; }
 

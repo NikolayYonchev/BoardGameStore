@@ -24,14 +24,14 @@
         {
             <div class="col-md-4 mb-4" class="boardgame-container">
                 <div class="card">
-                    <!-- Replace 'boardGame.ImageUrl' with the property storing the image path -->
                     <img class="card-img-top" src="@boardGame.ImageUrl" alt="@boardGame.Title";">
                     <div class="card-body">
                         <h5 class="card-title">@boardGame.Title</h5>
                         <p class="card-text">
                             <strong>Price:</strong> $@boardGame.PurchasePrice
                         </p>
-                        <a href="#" class="btn btn-primary">Buy</a>
+                        <a asp-controller="Purchase" asp-action="Index" asp-route-boardGameId="@boardGame.BoardGameId"
+                        asp-route-userId="@ViewBag.UserId" class="btn btn-primary">Buy</a>
                         <a asp-controller="Rentals" asp-action="Index" asp-route-boardGameId="@boardGame.BoardGameId"
                         asp-route-userId="@ViewBag.UserId" class="btn btn-primary">Rent</a>
                     </div>
