@@ -4,7 +4,7 @@
 	ViewData["Title"] = "Index";
 }
 
-<form asp-action="Submit" asp-controller="Rentals" method="post">
+<form asp-action="Submit" asp-controller="Purchase" asp-route-boardGameId="@Model.BoardGameId method="post">
 	<div class="container mt-4">
 		<h1 class="text-center">Purchase Board Game</h1>
 		<div class="card">
@@ -32,7 +32,8 @@
 					<strong>Total:</strong> <span id="totalAmount">0</span><br>
 				</p>
 				<input type="hidden" name="BoardGameId" value="@Model.BoardGameId" />
-				<button type="submit" class="btn btn-success">Purchase</button>
+				<button type="submit" class="btn btn-success">Confirm Purchase</button>
+				@* <a asp-action="Submit" asp-controller="Purchase"  asp-route-boardGameId="@Model.BoardGameId" class="btn btn-success">Purchase</a> *@
 				<a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Cancel</a>
 			</div>
 		</div>

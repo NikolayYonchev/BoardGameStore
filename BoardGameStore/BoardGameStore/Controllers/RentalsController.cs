@@ -75,16 +75,11 @@ namespace BoardGameStore.Controllers
 				ReturnDate= rental.ReturnDate,
 				Title = boardGame.Title
 			};
-			//if remember me btn is checked when logging in the return will fail because the userId will be different
 			return RedirectToAction(nameof(Confirm),rentalOutput);
-			//Rentals/Confirm/1
-			//Rentals/Confirm?id=1
 		}
 		[HttpGet]
 		public async Task<IActionResult> Confirm(RentalOutputModel outputModel)
 		{
-			// rentalviewmodel must be returned
-
 			return View(outputModel);
 		}
 	}

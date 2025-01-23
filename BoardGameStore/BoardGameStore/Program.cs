@@ -4,8 +4,16 @@ using BoardGameStore.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Set the culture to a specific format (e.g., US English for "." as the decimal separator)
+var cultureInfo = new CultureInfo("en-US"); // Use "en-US" for "." or "de-DE" for ","
+
+// Apply the culture globally
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
