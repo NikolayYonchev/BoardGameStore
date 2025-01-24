@@ -8,16 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using BoardGameStore.Data;
 using BoardGameStore.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BoardGameStore.Controllers
 {
     public class BoardGamesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public BoardGamesController(ApplicationDbContext context)
+        public BoardGamesController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: BoardGames
@@ -58,24 +61,56 @@ namespace BoardGameStore.Controllers
         }
 
 
+        private void CheckPath(BoardGame boardGame)
+        {
+
+            // Generate the path to save the file
+            var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+            Directory.CreateDirectory(uploadsFolder); // Ensure the directory exists
+
+            // Create a unique file name to avoid conflicts
+            var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(boardGame.Image.FileName);
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            // Save the file to the specified path
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                boardGame.Image.CopyTo(fileStream);
+            }
+
+            // Set the ImageUrl to the relative path
+            boardGame.ImageUrl = "/images/" + uniqueFileName;
+
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(BoardGame boardGame)
         {
+            /*var image = boardGame.Image;
+            var imageURl = boardGame.Image.ContentDisposition;
+            var imageURl2 = boardGame.Image.ContentType;
+            var imageURl3 = boardGame.Image.Name;
+            var imageURl4 = boardGame.Image.FileName; // the-mind.png
+            var imageUR5 = boardGame.Image.Headers;*/
+            if (boardGame.Image != null)
+            {
+                CheckPath(boardGame);
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(boardGame);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(boardGame);
         }
 
-        // similar to details action
 
         // GET: BoardGames/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
@@ -88,18 +123,24 @@ namespace BoardGameStore.Controllers
             }
             return View(boardGame);
         }
-        
-        // do not use magic strings
-        // logic should be inside controller
+
+
 
         // POST: BoardGames/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BoardGameId,Title,Category,MinPlayers,MaxPlayers,Description,RentalPricePerDay,PurchasePrice,Quantity,Condition")] BoardGame boardGame)
+        public async Task<IActionResult> Edit(int id, BoardGame boardGame)
         {
             if (id != boardGame.BoardGameId)
+            {
+                return NotFound();
+            }
+
+            // Fetch the existing board game from the database
+            var existingBoardGame = await _context.BoardGames.AsNoTracking().FirstOrDefaultAsync(b => b.BoardGameId == id);
+            if (existingBoardGame == null)
             {
                 return NotFound();
             }
@@ -113,7 +154,7 @@ namespace BoardGameStore.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BoardGameExists(boardGame.BoardGameId))
+                    if (!_context.BoardGames.Any(b => b.BoardGameId == boardGame.BoardGameId))
                     {
                         return NotFound();
                     }
@@ -122,9 +163,38 @@ namespace BoardGameStore.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(boardGame);
+
+            return RedirectToAction(nameof(Index),"Home");
+            /*  if (id != boardGame.BoardGameId)
+              {
+                  return NotFound();
+              }
+
+              if (ModelState.IsValid)
+              {
+                  try
+                  {
+                      //CheckPath(boardGame);
+                      _context.Update(boardGame);
+                      await _context.SaveChangesAsync();
+                  }
+                  catch (DbUpdateConcurrencyException)
+                  {
+                      if (!BoardGameExists(boardGame.BoardGameId))
+                      {
+                          return NotFound();
+                      }
+                      else
+                      {
+                          throw;
+                      }
+                  }
+                  return RedirectToAction(nameof(Index));
+              }
+              return View(nameof(Index));*/
         }
 
         // GET: BoardGames/Delete/5\
