@@ -20,6 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddTransient<SignInManager<User>>();
+//builder.Services.AddScoped<IUserClaimsPrincipalFactory<User>, ApplicationUserClaimsPrincipalFactory>();
 //builder.Services.AddTransient check out DI
 //builder.Services.AddScoped
 //builder.Services.AddSingleton
@@ -218,8 +219,8 @@ using (var scope = app.Services.CreateScope())
                 Quantity = 1,
                 Condition = Condition.Used,
                 Status = Status.Available
-            },
-            new BoardGame
+            }
+            /*new BoardGame
             {
                 Title = "Root2",
                 ImageUrl = "/images/Root.jpg",
@@ -232,7 +233,7 @@ using (var scope = app.Services.CreateScope())
                 Quantity = 1,
                 Condition = Condition.Used,
                 Status = Status.Unavailable
-            }
+            }*/
         );
 
         await dbContext.SaveChangesAsync();

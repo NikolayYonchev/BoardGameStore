@@ -139,7 +139,8 @@ namespace BoardGameStore.Controllers
             }
 
             // Fetch the existing board game from the database
-            var existingBoardGame = await _context.BoardGames.AsNoTracking().FirstOrDefaultAsync(b => b.BoardGameId == id);
+            var existingBoardGame = await _context.BoardGames.AsNoTracking()
+                .FirstOrDefaultAsync(b => b.BoardGameId == id);
             if (existingBoardGame == null)
             {
                 return NotFound();
@@ -149,6 +150,7 @@ namespace BoardGameStore.Controllers
             {
                 try
                 {
+                    boardGame.ImageUrl = existingBoardGame.ImageUrl;
                     _context.Update(boardGame);
                     await _context.SaveChangesAsync();
                 }
