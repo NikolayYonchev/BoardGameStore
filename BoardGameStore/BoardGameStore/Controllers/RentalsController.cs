@@ -9,6 +9,7 @@ using BoardGameStore.Models.Enums;
 using BoardGameStore.ViewModels;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BoardGameStore.Controllers
 {
@@ -21,6 +22,7 @@ namespace BoardGameStore.Controllers
 			_context = context;
 		}
 
+		[Authorize]
 		[HttpGet]
 		public async Task<IActionResult> Index(int boardGameId)
 		{

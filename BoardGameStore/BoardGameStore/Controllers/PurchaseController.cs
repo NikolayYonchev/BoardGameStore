@@ -1,6 +1,7 @@
 ﻿using BoardGameStore.Data;
 using BoardGameStore.Models;
 using BoardGameStore.Models.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ namespace BoardGameStore.Controllers
         {
             _context = context;
         }
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Index(int boardGameId)
         {

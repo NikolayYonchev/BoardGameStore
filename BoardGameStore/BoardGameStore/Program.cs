@@ -56,11 +56,13 @@ using (var scope = app.Services.CreateScope())
     string adminEmail = "admin@example.com";
     string adminUsername = adminEmail;
     string adminPassword = "Admin@123";
+    string firstName = "Admin";
+    string lastName = "User";
 
     var adminUser = await userManager.FindByEmailAsync(adminEmail);
     if (adminUser == null)
     {
-        var newUser = new User { UserName = adminUsername, Email = adminEmail };
+        var newUser = new User { UserName = adminUsername, Email = adminEmail, FirstName = firstName, LastName = lastName };
         var result = await userManager.CreateAsync(newUser, adminPassword);
 
         if (result.Succeeded)
