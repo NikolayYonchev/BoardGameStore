@@ -21,7 +21,6 @@ namespace BoardGameStore.Controllers
 			_context = context;
 		}
 
-		// GET
 		[HttpGet]
 		public async Task<IActionResult> Index(int boardGameId)
 		{
@@ -43,7 +42,6 @@ namespace BoardGameStore.Controllers
 			return View(rentalViewModel);
 		}
 
-		// POST: Rentals/Return
 		[HttpPost]
 		public async Task<IActionResult> Submit(RentalInputModel rentalInputModel)
 		{

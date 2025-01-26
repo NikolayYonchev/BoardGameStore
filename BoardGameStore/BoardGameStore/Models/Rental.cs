@@ -22,22 +22,6 @@ namespace BoardGameStore.Models
 
         [Required]
         public DateTime RentalDate { get; set; }
-
-		/*public DateTime? ReturnDate
-        {
-            get
-            {
-                return ReturnDate;
-            }
-            set
-            {
-                if (returnDate > RentalDate)
-                {
-                    throw new InvalidDataException("The return date cannot be before rental date.");
-                }
-				returnDate = value;
-            }
-        }*/
         
 		public DateTime ReturnDate
 		{
@@ -56,9 +40,6 @@ namespace BoardGameStore.Models
 		}
         [Required]
         public decimal Total { get; set; }
-
-        //[Required]
-        //public Status Status { get; set; }
 
         public BoardGame BoardGame { get; set; }
 

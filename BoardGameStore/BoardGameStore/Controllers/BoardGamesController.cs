@@ -24,19 +24,13 @@ namespace BoardGameStore.Controllers
         }
 
         // GET: BoardGames
-        //[Authorize(Roles ="Admin")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.BoardGames.ToListAsync());
         }
 
-        // id allows nullable, but checks if null afterwards => no need for the ? operator
 
-        //logic inside controller => move to a service, check out dependency injection
-
-
-
-        // GET: BoardGames/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -54,44 +48,17 @@ namespace BoardGameStore.Controllers
             return View(boardGame);
         }
 
-        // GET: BoardGames/Create
         public IActionResult Create()
         {
             return View();
         }
 
 
-        private void CheckPath(BoardGame boardGame)
-        {
-
-            // Generate the path to save the file
-            var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-            Directory.CreateDirectory(uploadsFolder); // Ensure the directory exists
-
-            // Create a unique file name to avoid conflicts
-            var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(boardGame.Image.FileName);
-            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-            // Save the file to the specified path
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                boardGame.Image.CopyTo(fileStream);
-            }
-
-            // Set the ImageUrl to the relative path
-            boardGame.ImageUrl = "/images/" + uniqueFileName;
-
-        }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(BoardGame boardGame)
         {
-            /*var image = boardGame.Image;
-            var imageURl = boardGame.Image.ContentDisposition;
-            var imageURl2 = boardGame.Image.ContentType;
-            var imageURl3 = boardGame.Image.Name;
-            var imageURl4 = boardGame.Image.FileName; // the-mind.png
-            var imageUR5 = boardGame.Image.Headers;*/
             if (boardGame.Image != null)
             {
                 CheckPath(boardGame);
@@ -107,7 +74,6 @@ namespace BoardGameStore.Controllers
         }
 
 
-        // GET: BoardGames/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
 
@@ -125,10 +91,6 @@ namespace BoardGameStore.Controllers
         }
 
 
-
-        // POST: BoardGames/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, BoardGame boardGame)
@@ -138,7 +100,6 @@ namespace BoardGameStore.Controllers
                 return NotFound();
             }
 
-            // Fetch the existing board game from the database
             var existingBoardGame = await _context.BoardGames.AsNoTracking()
                 .FirstOrDefaultAsync(b => b.BoardGameId == id);
             if (existingBoardGame == null)
@@ -170,44 +131,15 @@ namespace BoardGameStore.Controllers
             }
 
             return RedirectToAction(nameof(Index),"Home");
-            /*  if (id != boardGame.BoardGameId)
-              {
-                  return NotFound();
-              }
-
-              if (ModelState.IsValid)
-              {
-                  try
-                  {
-                      //CheckPath(boardGame);
-                      _context.Update(boardGame);
-                      await _context.SaveChangesAsync();
-                  }
-                  catch (DbUpdateConcurrencyException)
-                  {
-                      if (!BoardGameExists(boardGame.BoardGameId))
-                      {
-                          return NotFound();
-                      }
-                      else
-                      {
-                          throw;
-                      }
-                  }
-                  return RedirectToAction(nameof(Index));
-              }
-              return View(nameof(Index));*/
         }
 
-        // GET: BoardGames/Delete/5\
-        // use this -> [HttpDelete]
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            // add delete
             var boardGame = await _context.BoardGames
                 .FirstOrDefaultAsync(m => m.BoardGameId == id);
 
@@ -219,7 +151,6 @@ namespace BoardGameStore.Controllers
             return View(boardGame);
         }
 
-        // POST: BoardGames/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -237,6 +168,27 @@ namespace BoardGameStore.Controllers
         private bool BoardGameExists(int id)
         {
             return _context.BoardGames.Any(e => e.BoardGameId == id);
+        }
+        private void CheckPath(BoardGame boardGame)
+        {
+
+            // Generate the path to save the file
+            var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+            Directory.CreateDirectory(uploadsFolder); // Ensure the directory exists
+
+            // Create a unique file name to avoid conflicts
+            var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(boardGame.Image.FileName);
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            // Save the file to the specified path
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                boardGame.Image.CopyTo(fileStream);
+            }
+
+            // Set the ImageUrl to the relative path
+            boardGame.ImageUrl = "/images/" + uniqueFileName;
+
         }
     }
 }

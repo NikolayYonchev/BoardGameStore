@@ -26,11 +26,13 @@ namespace BoardGameStore.Models
         public Status Status { get; set; }
 
         [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Minimum players must be at least 1!")]
+        [Display(Name ="Min Players")]
+        [Range(1, 100, ErrorMessage = "Minimum players must be at least 1!")]
         public int MinPlayers { get; set; }
 
         [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Maximum players must be a valid positive number.")]
+        [Display(Name = "Max Players")]
+        [Range(1, 100, ErrorMessage = "Maximum players must be a valid positive number.")]
         public int MaxPlayers
         {
             get { return maxPlayers; }
@@ -48,9 +50,11 @@ namespace BoardGameStore.Models
         public string? Description { get; set; }
 
         [Required]
+        [Display(Name = "Rental Price Per Day")]
         public decimal RentalPricePerDay { get; set; }
 
         [Required]
+        [Display(Name = "Purchase Price")]
         public decimal PurchasePrice { get; set; }
 
         [Required]

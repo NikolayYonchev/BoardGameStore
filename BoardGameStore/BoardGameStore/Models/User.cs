@@ -11,10 +11,6 @@ namespace BoardGameStore.Models
             Purchases = new HashSet<Purchase>();
         }
 
-        //[Required]
-        //[RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be exactly 10 digits.")]
-
-        //public string PhoneNumber { get; set; }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
