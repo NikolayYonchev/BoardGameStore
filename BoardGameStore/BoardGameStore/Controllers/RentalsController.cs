@@ -47,7 +47,6 @@ namespace BoardGameStore.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Submit(RentalInputModel rentalInputModel)
 		{
-			//TODO
 			var boardGame = await _context.BoardGames
 				 .FirstOrDefaultAsync(b => b.BoardGameId == rentalInputModel.BoardGameId);
 			var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;

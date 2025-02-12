@@ -23,7 +23,6 @@ namespace BoardGameStore.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        // GET: BoardGames
         [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Index()
         {
@@ -72,7 +71,6 @@ namespace BoardGameStore.Controllers
 
             return View(boardGame);
         }
-
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -133,7 +131,6 @@ namespace BoardGameStore.Controllers
             return RedirectToAction(nameof(Index),"Home");
         }
 
-        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -171,22 +168,17 @@ namespace BoardGameStore.Controllers
         }
         private void CheckPath(BoardGame boardGame)
         {
-
-            // Generate the path to save the file
             var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-            Directory.CreateDirectory(uploadsFolder); // Ensure the directory exists
-
-            // Create a unique file name to avoid conflicts
+            Directory.CreateDirectory(uploadsFolder); 
+            
             var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(boardGame.Image.FileName);
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            // Save the file to the specified path
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
                 boardGame.Image.CopyTo(fileStream);
             }
 
-            // Set the ImageUrl to the relative path
             boardGame.ImageUrl = "/images/" + uniqueFileName;
 
         }

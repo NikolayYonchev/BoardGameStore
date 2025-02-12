@@ -10,15 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalAmount = document.getElementById("totalAmount");
 
     function calculateTotal() {
-        const today = new Date(); // Current date
-        const endDate = new Date(rentalEndDate.value); // User-selected end date
+        const today = new Date();
+        const endDate = new Date(rentalEndDate.value);
 
         if (rentalEndDate.value && endDate > today) {
-            const timeDiff = endDate - today; // Difference in milliseconds
-            const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); // Convert to days
+            const timeDiff = endDate - today; 
+            const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); 
             const total = days * rentalPricePerDay;
             console.log("Total: " + total);
-            totalAmount.textContent = total.toFixed(2); // Display total with 2 decimal places
+            totalAmount.textContent = total.toFixed(2);
         }
         else {
             totalAmount.textContent = "0";
@@ -27,11 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("JavaScript loaded successfully!");
 
-    rentalEndDate.addEventListener("change", calculateTotal); // Trigger calculation on end date change
+    rentalEndDate.addEventListener("change", calculateTotal);
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
     var yyyy = today.getFullYear();
 
     today = yyyy + '-' + mm + '-' + dd;

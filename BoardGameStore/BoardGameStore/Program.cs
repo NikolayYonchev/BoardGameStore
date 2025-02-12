@@ -18,10 +18,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddTransient<SignInManager<User>>();
-//builder.Services.AddScoped<IUserClaimsPrincipalFactory<User>, ApplicationUserClaimsPrincipalFactory>();
-//builder.Services.AddTransient check out DI
-//builder.Services.AddScoped
-//builder.Services.AddSingleton
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedEmail = false)
     .AddRoles<IdentityRole>()
