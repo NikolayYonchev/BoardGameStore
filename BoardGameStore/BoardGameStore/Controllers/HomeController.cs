@@ -28,6 +28,16 @@ namespace BoardGameStore.Controllers
             return View(boardGames);
         }
 
+        public IActionResult Search(int minPlayers, int maxPlayers) 
+        {
+            var boardGames = _context.BoardGames
+                .Where(x=>x.MinPlayers == minPlayers && x.MaxPlayers == maxPlayers)
+                .ToList();
+
+            return View("Index", boardGames);
+        }
+
+
         public IActionResult Privacy()
         {
             return View();

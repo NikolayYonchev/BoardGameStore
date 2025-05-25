@@ -29,8 +29,8 @@ namespace BoardGameStore.Controllers
             return View(await _context.BoardGames.ToListAsync());
         }
 
-
-        public async Task<IActionResult> Details(int? id)
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -47,7 +47,8 @@ namespace BoardGameStore.Controllers
             return View(boardGame);
         }
 
-        public IActionResult Create()
+		[Authorize(Roles = "Admin")]
+		public IActionResult Create()
         {
             return View();
         }
@@ -56,7 +57,8 @@ namespace BoardGameStore.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BoardGame boardGame)
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Create(BoardGame boardGame)
         {
             if (boardGame.Image != null)
             {
@@ -72,7 +74,8 @@ namespace BoardGameStore.Controllers
             return View(boardGame);
         }
 
-        public async Task<IActionResult> Edit(int? id)
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Edit(int? id)
         {
 
             if (id == null)
@@ -91,7 +94,8 @@ namespace BoardGameStore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, BoardGame boardGame)
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Edit(int id, BoardGame boardGame)
         {
             if (id != boardGame.BoardGameId)
             {
@@ -131,7 +135,8 @@ namespace BoardGameStore.Controllers
             return RedirectToAction(nameof(Index),"Home");
         }
 
-        public async Task<IActionResult> Delete(int? id)
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -150,7 +155,8 @@ namespace BoardGameStore.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var boardGame = await _context.BoardGames.FindAsync(id);
             if (boardGame != null)
